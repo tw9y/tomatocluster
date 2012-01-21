@@ -1,2 +1,5 @@
-require './app'
-run Sinatra::Application
+require File.dirname(__FILE__) + "/config/boot.rb"
+
+run Rack::URLMap.new({
+	"/" => TomatoCluster::App
+})

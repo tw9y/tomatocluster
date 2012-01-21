@@ -9,4 +9,5 @@ gem "coffee-script"
 
 group :test do
   gem "factory_girl"
+  gem 'minitest' # this is a newer version than the one included in ruby 1.9
 end

@@ -1,0 +1,19 @@
+%h1.page_title Users
+%table
+  %tr
+    %th
+      %th permission level
+  - @users.each do |user|
+    %tr
+      %td
+        - if user.email
+          = user.email
+        - else
+          "user #{user.id}"
+        %td= user.permission_level
+      %td
+        %a{:href => "/users/#{user.id}"} show
+        %td
+          %a{:href => "/users/#{user.id}/edit"} edit
+        %td
+          %a{:href => "/users/#{user.id}/delete", :onclick => "return confirm('you sure?')"} delete

@@ -1,4 +1,5 @@
 require 'bundler'
+require 'uri'
 Bundler.setup
 
 Bundler.require(:default, ENV["RACK_ENV"].to_sym)
@@ -10,14 +11,22 @@ configure do
 end
 
 configure :development do
-  Mongo::Model.default_database_name = :tomatocluster_dev
+  set :mongo_db, 'tomatocluster_dev'
 end
 
 configure :test do
-  Mongo::Model.default_database_name = :tomatocluster_test
-  Mongo::Model.default_database.clear
+  set :mongo_db, 'tomatocluster_test'
 end
 
 configure :production do
-  Mongo::Model.default_database_name = :tomatocluster_prod
+  if ENV['MONGOHQ_URL']
+    mongo_uri = URI.parse(ENV['MONGOHQ_URL'])
+    ENV['MONGOHQ_HOST'] = mongo_uri.host
+    ENV['MONGOHQ_PORT'] = mongo_uri.port.to_s
+    ENV['MONGOHQ_USERNAME'] = mongo_uri.user
+    ENV['MONGOHQ_PASSWORD'] = mongo_uri.password
+    ENV['MONGOHQ_DATABASE'] = mongo_uri.path.gsub("/", "")
+  else
+    set :mongo_db, 'tomatocluster_prod'
+  end
 end

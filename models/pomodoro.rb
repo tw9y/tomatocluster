@@ -1,4 +1,3 @@
 class Pomodoro
-  inherit Mongo::Model
-  collection :pomodoros
+  include Mongoid::Document
 end

@@ -1,13 +1,15 @@
 source "http://rubygems.org"
 
 gem "sinatra"
-gem "mongodb_model"
+gem "sinatra-mongoid", :require => 'sinatra/mongoid'
+gem "bson_ext"
 gem "require_all"
 gem "haml"
 gem "sass"
 gem "coffee-script"
-gem "omniauth"
-gem 'omniauth-identity'
+gem 'sinatra-flash'
+
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :test do
   gem "factory_girl"

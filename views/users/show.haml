@@ -1,8 +1,5 @@
  %h1.page_title
-    - if @user.email
-      = @user.email
-    - elsif @user.fb_uid
-      <fb:name uid=#{@user.fb_uid} linked='false' />
+  = @user.email
   - if current_user.admin?
     %h2 permission level
     = @user.permission_level

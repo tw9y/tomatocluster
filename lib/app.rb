@@ -87,10 +87,7 @@ module TomatoCluster
     end
     
     post '/sign_up' do
-      puts params[:user].inspect
       @user = User.create(params[:user])
-      puts "user valid: #{@user.valid?}"
-      puts "user id: #{@user.id}"
       if @user.valid? && @user.id
         session[:user] = @user.id
         flash[:notice] = "Account created."
